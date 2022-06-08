@@ -1,0 +1,62 @@
+﻿@model CapaNegocio.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Lista de Empleados</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Presione el botón de "+" para agregar a un nuevo empleado a la Base de Datos</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>@Html.ActionLink("+", "Form", "Empleado", htmlAttributes: new { @class = "btn btn-success" })</p>
+        </div>
+    </div>
+
+    @if (Model.Empleados.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center" >
+                            <td></td>
+                            <td style="display:none">IdEmpleado</td>
+                            <td>Nombre del Empleado</td>
+                            <td style="display:none">IdArea</td>
+                            <td>Nombre del Área</td>
+                            <td>Fecha De Nacimiento</td>
+                            <td>Sueldo</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (CapaNegocio.Empleado empleado in Model.Empleados)
+                        {
+                            <tr class="text-center">
+                                <td><a class="btn btn-warning" href="@Url.Action("Form", "Empleado", new {IdEmpleado=empleado.IdEmpleado})"><i class="bi bi-pencil-square"></i></a></td>
+                                <td style="display:none">@empleado.IdEmpleado</td>
+                                <td>@empleado.Nombre @empleado.ApellidoPaterno @empleado.ApellidoMaterno</td>
+                                <td style="display:none">@empleado.Area.IdArea</td>
+                                <td>@empleado.Area.Nombre</td>
+                                <td>@empleado.FechaDeNacimiento</td>
+                                <td>@empleado.Sueldo</td>
+                                <td><a class="btn btn-danger" href="@Url.Action("Delete", "Empleado", new {IdEmpleado=empleado.IdEmpleado})"><i class="bi bi-trash3-fill"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

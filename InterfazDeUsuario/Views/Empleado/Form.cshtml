@@ -1,0 +1,101 @@
+﻿@model CapaNegocio.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Formulario</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Llene los campos para poder dar de alta al nuevo empleado, en caso de actualizar, por favor actualice el campo que necesite actualizar.</h4>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, htmlAttributes: new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.IdEmpleado, new { @style = "display:none" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Nombre)
+                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.ApellidoPaterno)
+                @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @placeholder = "Apellido Paterno" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.ApellidoMaterno)
+                @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @placeholder = "Apellido Materno" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Area.IdArea)
+                @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "Nombre"), "Seleccione Área", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.FechaDeNacimiento)
+                @Html.TextBoxFor(model => model.FechaDeNacimiento, new { @class = "form-control", @placeholder = "dd-MM-aaaa", @id = "txtFechaNacimiento" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Sueldo)
+                @Html.TextBoxFor(model => model.Sueldo, new { @class = "form-control", @placeholder = "Ingrese Sueldo" })
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-1">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+            <div class="col-md-1">
+                <a href="@Url.Action("GetAll","Empleado")" class="btn btn-danger">Regresar</a>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="jqueryui/style.css">
+<script type="text/javascript">
+
+    var j = jQuery.noConflict();
+
+    j(function () {
+        j("#txtFechaNacimiento").datepicker({
+            dateFormat: 'yy/mm/dd',
+            showOn: 'button',
+            buttonImage: "../../Img/calendar.png",
+            buttonImageOnly: true,
+            changeMonth: true,
+            changeYear: true
+
+        });
+        $(".ui-datepicker-trigger").css("width", "30px");
+        $(".ui-datepicker-trigger").css("height", "30px");
+    });
+</script>
