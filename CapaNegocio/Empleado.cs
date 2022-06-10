@@ -102,7 +102,7 @@ namespace CapaNegocio
                         empleado.Area = new Area();
                         empleado.Area.IdArea = Convert.ToByte(query.IdArea);
                         empleado.Area.Nombre = query.NombreArea;
-                        empleado.FechaDeNacimiento = query.FechaDeNacimiento.Value.ToString("dd/MM/yyyy");
+                        empleado.FechaDeNacimiento = query.FechaDeNacimiento.Value.ToString("yyyy/MM/dd");
                         empleado.Sueldo = Convert.ToDecimal(query.Sueldo);
                         result.Object = empleado;
                     }
